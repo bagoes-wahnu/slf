@@ -14,9 +14,32 @@ use Validator;
 
 class SlfController extends Controller
 {
+    public function json(Request $request){
+        if ($request->ajax()) {
+            $data = Slf::select('*');
+            return Datatables::of($data)
+                    ->addIndexColumn()
+                    ->addColumn('action', function($data){
+                        // $gid = $data->gid;
+                        // dd($gid);
+                        $view = route('show', $data);
+                        $btn = '<input type="hidden" name="gid" id="gid" value="'.$data->gid.'">';
+                        $btn = $btn . '<a href="'.$view.'" target="_blank" onclick="show_json('.$data->gid.')" data-gid="'.$data->gid.'" class="edit btn btn-info btn-sm mr-2 mb-2">
+                        View
+                        </a>';
+                        $btn = $btn . '<a href="javascript:void(0)" onclick="edit_json('.$data->gid.')" data-gid="'.$data->gid.'" data-toggle="modal" data-target="#modal-lg" class="edit btn btn-primary btn-sm mr-2 mb-2">
+                        Update
+                        </a>';
+                        return $btn;
+                    })
+                    ->rawColumns(['action'])
+                    ->make(true);
+        }
+        return view('home1');
+    }
     public function show_json($id)
     {
-        $aspects = Pengaduan::find($id);
+        $aspects = Slf::find($id);
         // dd($aspects);
         return response()->json($aspects);
     }
@@ -46,7 +69,7 @@ class SlfController extends Controller
         }else {
             $fileName2 = $request->emp_file_lapangan;
         }
-        if (Pengaduan::where('id', $request->id)->exists()) {
+        if (Slf::where('id', $request->id)->exists()) {
             $pengaduan = Pengaduan::findOrFail($request->id);
             $pengaduan->nama_pengadu = $request->nama_pengadu;
             $pengaduan->alamat_pengadu = $request->alamat_pengadu;
@@ -82,7 +105,7 @@ class SlfController extends Controller
             // $validator = Validator::make($request->all(), [
             //     'id' => 'required|digits:5',
             // ]);
-            Pengaduan::create([
+            Slf::create([
             // Product::update([
                 
             // ],
@@ -110,7 +133,7 @@ class SlfController extends Controller
     }
     public function delete_json($id)
     {
-        Pengaduan::find($id)->delete();
+        Slf::find($id)->delete();
       
         return response()->json(['success'=>'Data Pengaduan deleted successfully.']);
     }

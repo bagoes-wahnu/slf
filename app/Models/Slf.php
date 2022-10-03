@@ -17,5 +17,5 @@ class Slf extends Model
 
     // public $incrementing = false;
 
-    protected $table = 'imb';
+    protected $table = 'slf';
 }

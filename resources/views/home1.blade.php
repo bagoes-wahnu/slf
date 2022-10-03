@@ -141,11 +141,10 @@
                     <th>ID</th>
                     {{-- <th>No SKRK</th> --}}
                     <th>No SLF</th>
-                    <th>Alamat Persil</th>
+                    <th>Alamat Persil IMB</th>
                     <th>Nama Bangunan</th>
-                    <th>Nama Pemohon</th>
+                    <th>Nama Pemohon SLF</th>
                     <th>Atas Nama</th>
-                    <th>No Telp</th>
                     <th>Action</th>
                   </tr>
                   </thead>
@@ -357,21 +356,20 @@
         "processing": true,
         "serverSide": false,
         "ajax": {
-            "url": '',
+            "url": '{{ route('slf.json') }}',
             "dataType": "json",
             "type": "GET",
             "data":{ _token: "{{csrf_token()}}"}
         },
         "columns": [
             // {data: 'DT_RowIndex', name: 'id'},
-            {data: 'id', name: 'id'},
+            {data: 'gid', name: 'gid'},
             // {data: 'no_skrk'},
-            {data: 'nama_pengadu'},
-            {data: 'alamat_pengadu'},
-            {data: 'nama_teradu'},
-            {data: 'alamat_teradu'},
-            {data: 'kelurahan'},
-            {data: 'kecamatan'},
+            {data: 'no_sk_slf'},
+            {data: 'alamat_persil_imb'},
+            {data: 'nama_bangunan'},
+            {data: 'nama_pemohon_slf'},
+            {data: 'atas_nama'},
             {data: 'action', orderable: false, searcable: false}
         ],
     });
