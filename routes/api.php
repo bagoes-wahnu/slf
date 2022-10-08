@@ -20,6 +20,7 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 
 Route::get('/slf/json', [SlfController::class,'json'])->name('slf.json');
+Route::get('/slf/search_json', [SlfController::class,'search_json'])->name('slf.search.json');
 Route::get('/slf/show_json/{gid}', [SlfController::class,'show_json'])->name('slf.show.json');
-Route::post('/slf/store_json/{gid}', [SlfController::class,'store_json'])->name('slf.store.json');
+Route::post('/slf/store_json', [SlfController::class,'store_json'])->name('slf.store.json');
 Route::delete('/slf/delete_json/{gid}', [SlfController::class,'delete_json'])->name('slf.delete.json');

@@ -9,7 +9,7 @@ class Slf extends Model
 {
     use HasFactory;
 
-    protected $primarykey = 'gid';
+    protected $primaryKey = 'gid';
 
     protected $guarded = [];
 
